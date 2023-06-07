@@ -11,13 +11,24 @@
     <body>
         <h1>Predict results</h1>
         <p>Enter the number of hours you studied</p>
-        <form action="/ " method="POST">
+        <form action="/predict " method="POST">
             <input type="number" name="hrs" placeholder="Hours studied">
             <input type="submit">
         </form>
         {% if my_marks %}
         <p>Your Predicted marks are:</p>{{my_marks}}
         {% endif %}
-
+        
+        <p>Enter the subject</p>
+        <form action="/materials " method="POST">
+            <input type="text" name="subject" placeholder="search with subject,language">
+            <input type="submit">
+        </form>
+        <h1>Links</h1>
+        <ul>
+            {% for link in links %}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {% endfor %}
+        </ul>
     </body>
 </html>
