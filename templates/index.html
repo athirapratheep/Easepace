@@ -5,30 +5,61 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="static/style.css">
-
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <title>easepace</title>
     </head>
     <body>
         <h1>Predict results</h1>
         <p>Enter the number of hours you studied</p>
-        <form action="/predict " method="POST">
-            <input type="number" name="hrs" placeholder="Hours studied">
+        <form action="/ " method="POST">
+            <input type="number" id="study_hours" name="hrs" placeholder="Hours studied">
             <input type="submit">
         </form>
         {% if my_marks %}
         <p>Your Predicted marks are:</p>{{my_marks}}
         {% endif %}
+
+        <div class="graph-container">
+            <h2>Study Hours Graph</h2>
+            <canvas id="study-hours-chart"></canvas>
+        </div>
+
+        <script>
+            var studyHourData = {{ study_hour_data|tojson }};
+    
+            // Extract days and study hours from the data
+            var days = Object.keys(studyHourData);
+            var hours = Object.values(studyHourData);
+    
+            // Create the chart
+            var ctx = document.getElementById('study-hours-chart').getContext('2d');
+            var chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: days,
+                    datasets: [{
+                        label: 'Study Hours',
+                        data: hours,
+                        backgroundColor: 'rgba(0, 123, 255, 0.5)',
+                        borderColor: 'rgba(0, 123, 255, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        </script>
         
         <p>Enter the subject</p>
         <form action="/materials " method="POST">
             <input type="text" name="subject" placeholder="search with subject,language">
             <input type="submit">
         </form>
-        <h1>Links</h1>
-        <ul>
-            {% for link in links %}
-            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-            {% endfor %}
-        </ul>
+
     </body>
 </html>

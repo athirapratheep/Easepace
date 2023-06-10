@@ -6,7 +6,7 @@ def scrape_youtube_videos(search_query):
     search_string = search_query + " ktu"
     
     # Define the YouTube Data API search URL
-    url = f"https://www.googleapis.com/youtube/v3/search?key=YourAPIKey&q={search_string}&part=snippet&type=video&maxResults=5"
+    url = f"https://www.googleapis.com/youtube/v3/search?key=AIzaSyBwuu3UjYHCMt9AsE11EK-yWp7UB2wnIHo&q={search_string}&part=snippet&type=video&maxResults=5"
     
     # Make a GET request to the API
     response = requests.get(url)
