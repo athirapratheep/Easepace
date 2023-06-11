@@ -7,7 +7,7 @@ def scrape_youtube_videos(search_query):
     search_string = search_query + " ktu"
     
     # Define the YouTube Data API search URL
-    url = f"https://www.googleapis.com/youtube/v3/search?key=AIzaSyAa4f4SQ56MIJJ0OJBlIBo_jeSns_ZNu9A&q={search_string}&part=snippet&type=video&maxResults=5"
+    url = f"https://www.googleapis.com/youtube/v3/search?key=YourYoutubeAPI&q={search_string}&part=snippet&type=video&maxResults=5"
     
     # Make a GET request to the API
     response = requests.get(url)
@@ -31,7 +31,7 @@ def scrape_youtube_videos(search_query):
     searchquery=search_query+"ktu notes"
     search = GoogleSearch({
         "q": searchquery, 
-        "api_key": "8117313f3d99826e23d69455323778a06007457decd251276c3f08e3750e7466"
+        "api_key": "YourAPI"
     })
     result = search.get_dict()
 
