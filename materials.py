@@ -1,3 +1,4 @@
+from serpapi import GoogleSearch
 import requests
 import json
 
@@ -6,7 +7,7 @@ def scrape_youtube_videos(search_query):
     search_string = search_query + " ktu"
     
     # Define the YouTube Data API search URL
-    url = f"https://www.googleapis.com/youtube/v3/search?key=YourAPIKey&q={search_string}&part=snippet&type=video&maxResults=5"
+    url = f"https://www.googleapis.com/youtube/v3/search?key=AIzaSyAa4f4SQ56MIJJ0OJBlIBo_jeSns_ZNu9A&q={search_string}&part=snippet&type=video&maxResults=5"
     
     # Make a GET request to the API
     response = requests.get(url)
@@ -22,6 +23,29 @@ def scrape_youtube_videos(search_query):
         video_title = item["snippet"]["title"]
         video_data[video_title] = video_url
     
+
+    note_data={}
+
+
+    
+    searchquery=search_query+"ktu notes"
+    search = GoogleSearch({
+        "q": searchquery, 
+        "api_key": "8117313f3d99826e23d69455323778a06007457decd251276c3f08e3750e7466"
+    })
+    result = search.get_dict()
+
+    # Retrieve the organic search results
+    organic_results = result.get("organic_results", [])
+    
+
+    # Display the first 5 search results
+    for index, organic_result in enumerate(organic_results[:5], start=1):
+        title = organic_result.get("title")
+        link = organic_result.get("link")
+        note_data[title]=link
+        
+
     # Return the video data (titles and URLs)
-    return video_data
+    return video_data,note_data
 

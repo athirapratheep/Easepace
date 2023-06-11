@@ -4,33 +4,65 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="static/style.css">
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <title>easepace</title>
     </head>
     <body>
-        <h1>Predict results</h1>
-        <p>Enter the number of hours you studied</p>
-        <form action="/ " method="POST">
-            <input type="number" id="study_hours" name="hrs" placeholder="Hours studied">
-            <input type="submit">
-        </form>
-        {% if my_marks %}
-        <p>Your Predicted marks are:</p>{{my_marks}}
-        {% endif %}
 
-        <div class="graph-container">
-            <h2>Study Hours Graph</h2>
-            <canvas id="study-hours-chart"></canvas>
-        </div>
+        <div class="container">
+            <h1>Predict Results</h1>
+            <p>Enter the number of hours you studied today!</p>
+            <form action="/" method="POST">
+                <div class="form-group">
+                    <label for="study_hours">Hours studied:</label>
+                    <input type="number" step="0.01" id="study_hours" name="hrs" class="form-control" placeholder="Hours studied">
+                </div>
+                <div class="form-group">
+                    <label for="goal_to">Your Goal:</label>
+                    <input type="number" step="0.01" id="goal_to" name="goalto" class="form-control" placeholder="Your Goal">
+                </div>
+                <input type="submit" class="btn btn-primary" value="Submit">
+            </form>
+
+            <p>You have studied an average of: <strong>{{my_marks}}</strong> hours this week</p>
+            {% if goal_tobe > 0 %}
+            <p>You should study <strong>{{goal_tobe}}</strong> hours more.</p> 
+            {% else %}
+            <p>You are good to go!</p>
+            {% endif %}
+
+            <div class="graph-container">
+                <h2>Study Hours Graph</h2>
+                <canvas id="study-hours-chart"></canvas>
+            </div>
+
+            <p>Enter the subject</p>
+            <form action="/materials" method="POST">
+                <div class="form-group">
+                    <label for="subject">Search with subject, language:</label>
+                    <input type="text" name="subject" class="form-control" placeholder="Search with subject, language">
+                </div>
+                <input type="submit" class="btn btn-primary" value="Submit">
+            </form>
+
+        
 
         <script>
             var studyHourData = {{ study_hour_data|tojson }};
+
+            // Extract days and study hours from the data
+            var days = Object.keys(studyHourData);
+            var hours = Object.values(studyHourData);
+
+
     
             // Extract days and study hours from the data
             var days = Object.keys(studyHourData);
             var hours = Object.values(studyHourData);
     
+
             // Create the chart
             var ctx = document.getElementById('study-hours-chart').getContext('2d');
             var chart = new Chart(ctx, {
@@ -54,12 +86,8 @@
                 }
             });
         </script>
-        
-        <p>Enter the subject</p>
-        <form action="/materials " method="POST">
-            <input type="text" name="subject" placeholder="search with subject,language">
-            <input type="submit">
-        </form>
+
+
 
     </body>
 </html>
