@@ -11,41 +11,46 @@
     </head>
     <body>
 
-        <div class="container">
-            <h1>Predict Results</h1>
-            <p>Enter the number of hours you studied today!</p>
-            <form action="/" method="POST">
-                <div class="form-group">
-                    <label for="study_hours">Hours studied:</label>
-                    <input type="number" step="0.01" id="study_hours" name="hrs" class="form-control" placeholder="Hours studied">
+        <div class="container-fluid">
+            <div class="row">
+                
+                <div class="col-md-2" id="custom-column">
+                    <form id="myForm">
+                        <a href="/materials" class="btn btn-block" id="button-block">Materials</a>
+                    </form>
+                    
                 </div>
-                <div class="form-group">
-                    <label for="goal_to">Your Goal:</label>
-                    <input type="number" step="0.01" id="goal_to" name="goalto" class="form-control" placeholder="Your Goal">
+                <div class="col-md-5">
+                    <h1>Predict Results</h1>
+                    <p>Enter the number of hours you studied today!</p>
+                    <form action="/" method="POST">
+                        <div class="form-group">
+                            <label for="study_hours">Hours studied:</label>
+                            <input type="number" step="0.01" id="study_hours" name="hrs" class="form-control" placeholder="Hours studied">
+                        </div>
+                        <div class="form-group">
+                            <label for="goal_to">Your Goal:</label>
+                            <input type="number" step="0.01" id="goal_to" name="goalto" class="form-control" placeholder="Your Goal">
+                        </div>
+                        <input type="submit" class="btn btn-block" id="button-block" value="Submit">
+                    </form>
+
+                    <p>You have studied an average of: <strong>{{my_marks}}</strong> hours this week</p>
+                    {% if goal_tobe > 0 %}
+                    <p>You should study <strong>{{goal_tobe}}</strong> hours more.</p> 
+                    {% else %}
+                    <p>You are good to go!</p>
+                    {% endif %}
                 </div>
-                <input type="submit" class="btn btn-primary" value="Submit">
-            </form>
-
-            <p>You have studied an average of: <strong>{{my_marks}}</strong> hours this week</p>
-            {% if goal_tobe > 0 %}
-            <p>You should study <strong>{{goal_tobe}}</strong> hours more.</p> 
-            {% else %}
-            <p>You are good to go!</p>
-            {% endif %}
-
-            <div class="graph-container">
-                <h2>Study Hours Graph</h2>
-                <canvas id="study-hours-chart"></canvas>
+                <div class="col-md-5">
+                    <div class="graph-container">
+                        <h2>Study Hours Graph</h2>
+                        <canvas id="study-hours-chart"></canvas>
+                    </div>
+                </div>
             </div>
 
-            <p>Enter the subject</p>
-            <form action="/materials" method="POST">
-                <div class="form-group">
-                    <label for="subject">Search with subject, language:</label>
-                    <input type="text" name="subject" class="form-control" placeholder="Search with subject, language">
-                </div>
-                <input type="submit" class="btn btn-primary" value="Submit">
-            </form>
+            
 
         
 
@@ -66,15 +71,16 @@
             // Create the chart
             var ctx = document.getElementById('study-hours-chart').getContext('2d');
             var chart = new Chart(ctx, {
-                type: 'bar',
+                type: 'line',
                 data: {
                     labels: days,
                     datasets: [{
                         label: 'Study Hours',
                         data: hours,
-                        backgroundColor: 'rgba(0, 123, 255, 0.5)',
-                        borderColor: 'rgba(0, 123, 255, 1)',
-                        borderWidth: 1
+                        backgroundColor: 'rgba(170, 153, 229, 100)',
+                        borderColor: 'rgba(184, 171, 229, 100)',
+                        borderWidth: 3,
+                        fill:true
                     }]
                 },
                 options: {
