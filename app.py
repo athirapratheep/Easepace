@@ -98,6 +98,7 @@ def marks():
     study_hour_list = []
     avghrs = 0
     goalto_be = 0
+    username = current_user.username
 
     if request.method == "POST":
         hrs = request.form["hrs"]
@@ -134,7 +135,7 @@ def marks():
 
 
         # Retrieve all student data for the user
-        user_data = StudentData.query.filter_by(user_id=user_id).all()
+        user_data = StudentData.query.filter_by(user_id=current_user.id).all()
 
         for data in user_data:
             avghrs += float(data.study_hours)
@@ -153,7 +154,7 @@ def marks():
             for data in user_data
         ]
 
-    return render_template("index.html", my_marks=avghrs, goal_tobe=goalto_be, study_hour_data=study_hour_list)
+    return render_template("index.html", my_marks=avghrs, goal_tobe=goalto_be, study_hour_data=study_hour_list,username=username)
 
 @app.route("/materials", methods=["GET", "POST"])
 @login_required

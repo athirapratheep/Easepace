@@ -27,7 +27,9 @@
                             </form>
                         </div>
                         <div class="col-md-5">
-                            <h1>Predict Results</h1>
+                            <h1>Hello, <span id="username">{{ username }}</span>!</h1>
+                            <hr>
+                            <h2>Predict Results</h2>
                             <p>Enter the number of hours you studied today!</p>
                             <form action="{{ url_for('marks') }}" method="POST">
                                 <div class="form-group">
