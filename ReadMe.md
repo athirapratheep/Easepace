@@ -1,3 +1,5 @@
-****master.py*****
-
-update "YourAPIKey" with the API key in the link(line 9)
+#During initial run 
+  run these commands
+  flask db init
+  flask db migrate
+  flask db upgrade
