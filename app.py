@@ -95,9 +95,11 @@ def logout():
 @login_required
 def marks():
     marks_pred = 0
+    goaltobe = None
     study_hour_list = []
     avghrs = 0
-    goalto_be = 0
+    goalto_be = None
+    username = current_user.username
 
     if request.method == "POST":
         hrs = request.form["hrs"]
@@ -107,7 +109,6 @@ def marks():
             marks_pred, goaltobe = m.marks_prediction(hrs, goals)
         else:
             marks_pred = 0
-            goaltobe = None
 
         study_hours = request.form["hrs"]
 
@@ -115,7 +116,7 @@ def marks():
 
         user_id = current_user.id
 
-       # Check if an entry already exists for the current user and date
+        # Check if an entry already exists for the current user and date
         existing_entry = StudentData.query.filter_by(user_id=user_id, date=current_date).first()
         if existing_entry:
             existing_entry.study_hours = study_hours  # Update the study_hours value
@@ -132,28 +133,32 @@ def marks():
             db.session.add(student_data)
             db.session.commit()
 
+    # Retrieve all student data for the user
+    user_data = StudentData.query.filter_by(user_id=current_user.id).all()
 
-        # Retrieve all student data for the user
-        user_data = StudentData.query.filter_by(user_id=user_id).all()
-
+    if user_data:
         for data in user_data:
             avghrs += float(data.study_hours)
 
         avghrs = avghrs / len(user_data)
-        goaltobe = (float(goaltobe) - float(avghrs)) * len(user_data)
-        goalto_be = round(goaltobe, 2)
         avghrs = round(avghrs, 2)
 
-        # Convert StudentData objects to a list of dictionaries
-        study_hour_list = [
-            {
-                "date": data.date.strftime("%Y-%m-%d"),
-                "study_hours": data.study_hours
-            }
-            for data in user_data
-        ]
+    if goaltobe is not None:
+        goalto_be = round(float(goaltobe), 2)
 
-    return render_template("index.html", my_marks=avghrs, goal_tobe=goalto_be, study_hour_data=study_hour_list)
+    # Convert StudentData objects to a list of dictionaries
+    study_hour_list = [
+        {
+            "date": data.date.strftime("%Y-%m-%d"),
+            "study_hours": data.study_hours
+        }
+        for data in user_data
+    ]
+
+    return render_template("index.html", my_marks=avghrs, goal_tobe=goalto_be, study_hour_data=study_hour_list, username=username)
+
+
+
 
 @app.route("/materials", methods=["GET", "POST"])
 @login_required
