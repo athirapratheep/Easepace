@@ -1,51 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Link Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="style.css">
-    <title>Submit page</title>
-</head>
-
-<body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <p>Enter the subject</p>
-                <form action="/materials" method="POST">
-                    <div class="form-group">
-                        <input type="text" name="subject" class="form-control" placeholder="Search with subject, language">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="static/style.css">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <title>easepace</title>
+    </head>
+    <body>
+        <div class="container-fluid" id="container-outer" >
+                <div class="container-fluid" id="container-square" >
+                
+                    <div class="row fluid-row">
+                        
+                        <div class="col-md-2" id="custom-column">
+                            <form id="myForm">
+                                <a href="/index" class="btn btn-block" id="button-block">Dashboard</a>
+                            </form>
+                            <form id="myForm">
+                                <a href="/materials" class="btn btn-block" id="button-block-sub">Materials</a>
+                            </form>
+                            <form action="{{ url_for('logout') }}" method="POST">
+                                <button type="submit" class="btn btn-block" id="button-block">Logout</button>
+                            </form>
+                        </div>
+                        <div class="col-md-10">
+                        
+                                <h2>Enter the subject</h2>
+                                <form action="/materials" method="POST">
+                                    <div class="form-group">
+                                        <input type="text" name="subject" class="form-control" placeholder="Search with subject, language">
+                                    </div>
+                                    <input type="submit" class="btn btn-block" id="button-block" value="Submit">
+                                </form>
+                                <div class="row ">
+                                    <div class="col-md-5">
+                                        <h1>Videos</h1>
+                                            <ul>
+                                                {% for link in links %}
+                                                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    <div class="col-md-5">
+                                        <h1>Notes</h1>
+                                        <ul>
+                                            {% for link in note_links %}
+                                            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                        </div>
                     </div>
-                    <input type="submit" class="btn btn-primary" value="Submit">
-                </form>
+                </div>
             </div>
-            <div class="col-md-6">
-                <h1>Videos</h1>
-                <ul>
-                    {% for link in links %}
-                    <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <div class="col-md-6">
-                <h1>Notes</h1>
-                <ul>
-                    {% for link in note_links %}
-                    <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <!-- Link Bootstrap JS (optional) -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-</body>
-
+    </body>
 </html>
-
-    
-

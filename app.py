@@ -11,7 +11,7 @@ import materials as ma
 import datetime
 import pickle
 
-app = Flask(__name__)
+app = Flask(__name__,static_folder='static')
 app.secret_key = "afaafaefaagaegeg"
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///auth.db'
 db = SQLAlchemy(app)

@@ -1,14 +1,79 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Home Page</title>
-</head>
-<body>
-    <h1>Welcome to the Home Page</h1>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Easepace</title>
+        
+        <link rel="stylesheet" href="static/home.css">
+    </head>
+    <body>
+        <div class="container">
+            
+                
+            
+            <p>
+                We aim to combine the power of machine learning with an intuitive user interface to 
+                help students achieve their academic goals. With our unique predictive model based
+                on linear regression, we can estimate your expected results based on your study hours. 
+                No more uncertainty—our website will guide you by suggesting how much more you need 
+                to study to reach a specific target.
+            </p>
+            <p>
+                But that's not all! We believe in empowering students with comprehensive tools for 
+                self-analysis. Our website provides detailed graphs and visualizations of your study 
+                hours per week. Dive into the data and gain valuable insights into your study patterns,
+                 productivity, and progress over time. With this information at your fingertips, you 
+                 can make informed decisions to optimize your study routine.
+            </p>
+            <p>
+                Accessing study materials has never been easier. We've curated a vast collection of
+                lectures, notes, and resources from reputable sources across the internet. Our 
+                user-friendly interface allows you to search, browse, and access these materials all 
+                in one place. Whether you need additional explanations, examples, or supplementary 
+                materials, we've got you covered. Enhance your learning experience with the 
+                convenience and breadth of resources available on our website.
+            </p>
+            <p>
+                Our website is designed with simplicity and usability in mind. Just enter your study 
+                hours, and our powerful machine learning algorithm will provide an instant prediction 
+                of your expected results. The intuitive and interactive graphs will captivate your 
+                attention, enabling you to track your progress effortlessly. Seamlessly navigate 
+                through the website, explore study materials, and make data-driven decisions—all 
+                with a few clicks.
+            </p>
+            <p>
+                We prioritize your privacy and security. Rest assured that all your personal information 
+                and study data are handled with utmost confidentiality. Our website follows 
+                industry-standard security protocols to protect your data from unauthorized access or 
+                misuse. We understand the importance of a safe and trustworthy learning environment, and 
+                we are committed to providing you with a seamless and secure experience throughout your 
+                academic journey. Your focus should be on learning, and we'll take care of the rest.
+            </p>
+            <p>
+                Take control of your learning journey and maximize your potential. Whether you're aiming 
+                for academic excellence, preparing for an exam, or seeking to improve your understanding 
+                of a subject, our website is here to support and guide you. Start exploring today and 
+                unlock the doors to your academic success! 
+            </p>
+        </div>
+        <header>
+            <div class="top-right">
+                <div class="dropdown">
+                    <span class="dropdown-link">Our Developers ></span>
+                    <div class="dropdown-content">
+                      <a href="https://www.linkedin.com/in/geo-nobins">Geo Nobins</a>
+                      <a href="https://www.linkedin.com/in/muhammed-ajnas-180a8825a">Muhammed Ajnas</a>
+                      <a href="https://www.linkedin.com/in/athira-k-k-9b8859211">Athira KK</a>
+                      <a href="#">Alan Johnson</a>
+                    </div>
+                  </div>
+                <a href="{{ url_for('login') }}"><button>Login</button></a>
+                <a href="{{ url_for('signup') }}"><button>Signup</button></a>
+            </div>
+            <h1 >Easepace</h1>
+        </header>
+        <script src="{{ url_for('static', filename='script.js') }}"></script>
 
-    <div>
-        <a href="{{ url_for('login') }}"><button>Login</button></a>
-        <a href="{{ url_for('signup') }}"><button>Signup</button></a>
-    </div>
-</body>
+    </body>
 </html>

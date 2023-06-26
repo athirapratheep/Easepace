@@ -31,7 +31,7 @@ def scrape_youtube_videos(search_query):
     searchquery=search_query+"ktu notes"
     search = GoogleSearch({
         "q": searchquery, 
-        "api_key": "SearchAPI"
+        "api_key": "GoogleApi"
     })
     result = search.get_dict()
 
